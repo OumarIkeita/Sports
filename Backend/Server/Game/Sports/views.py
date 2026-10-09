@@ -3,8 +3,8 @@ from django.http import JsonResponse
 from rest_framework.parsers import JSONParser
 import io
 from django.views.decorators.csrf import csrf_exempt
-from .models import Club
-from .serializers import ClubSerializer
+from .models import Club, Team
+from .serializers import ClubSerializer, TeamSerializer
 # Create your views here.
 #--------------------------------All about CLUB VIEWS-----------------------------------------
 # create a POST and GET all information about Club
@@ -55,4 +55,23 @@ def singleClubs(request, query):
 #--------------------------------End of CLUB VIEWS-----------------------------------------
 
 
-#-------------------------
+#-------------------------  CREATE POST AND GET ALL TEAMS ---------------------------
+@csrf_exempt
+def teamAll ( request):
+    if request.method == "POST":
+        team_data = request.body
+        team_io = io.BytesIO(team_data)
+        team_parse = JSONParser().parse(team_io)
+        serializer = TeamSerializer(data=team_parse, many=True)
+
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse({"Team created":"successful"}, status=201)
+        return JsonResponse(serializer.errors, status=400)
+
+    if request.method == "GET":
+        get_data = Team.objects.all()
+        serializer = TeamSerializer(get_data, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
+#--------------------end Team View-----------------------------------------------------------
