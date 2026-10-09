@@ -1,0 +1,16 @@
+/* Update this selector in your main/global CSS file */
+.Top_Element {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* This targets the sports pages container directly under the Navbar wrapper */
+.Top_Element > div:last-child {
+  flex: 1;
+  padding: 3rem 2rem;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+}

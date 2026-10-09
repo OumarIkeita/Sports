@@ -1,0 +1,71 @@
+/* 1. Main Navbar Wrapper */
+.MainDiv {
+  width: 100%;
+  background-color: #ffffff;
+  border-bottom: 1px solid #7f9bb8;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+/* 2. Inner Container */
+.navbarDiv {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* 3. Navigation List Layout */
+.ulList {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centers the links. Change to 'flex-start' to align left */
+  gap: 2.5rem; /* Perfectly spaces out the links */
+  list-style: none; /* Removes bullet points */
+  margin: 0;
+  padding: 0;
+  height: 70px; /* Consistent height for the navbar */
+}
+
+/* 4. Link Typography & Styling */
+.ulList li a {
+  text-decoration: none;
+  font-family:
+    "Inter",
+    system-ui,
+    -apple-system,
+    sans-serif;
+  font-size: 0.875rem; /* 14px equivalent for clean layout */
+  font-weight: 600; /* Semi-bold for high visibility */
+  color: #4a5568; /* Slate gray color */
+  letter-spacing: 0.05em; /* Clean breathing room between capitals */
+  text-transform: uppercase;
+  transition: all 0.2s ease-in-out;
+  padding: 0.5rem 0;
+  position: relative;
+}
+
+/* 5. Hover & Interactive States */
+.ulList li a:hover {
+  color: #1a73e8; /* Sharp sports-blue on hover */
+}
+
+/* Smooth underline effect on hover */
+.ulList li a::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #1a73e8;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.ulList li a:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
