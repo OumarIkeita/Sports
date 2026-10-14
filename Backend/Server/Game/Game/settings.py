@@ -39,9 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
+    'django_filters',
     'Football',
     'Auth',
-    'Sports'
+    'Sports',
+    "api",
+    "student",
+    "employees",
     #'rest_framework.authtoken',
 ]
 
@@ -61,7 +65,14 @@ MIDDLEWARE = [
 REST_FRAMEWORK ={
     'DEFAULT_PERMISSIONS_CLASSES':[
         'rest_framework.permission.AllowAny'
-   ]}
+   ],
+   "DEFAULT_PAGINATION_CLASS":'rest_framework.pagination.LimitOffsetPagination',
+   'PAGE_SIZE':2,
+   
+   'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend',
+    ],
+   }
 
 CORS_ORIGIN_ALLOW_ALL = True
 #End of Connection
