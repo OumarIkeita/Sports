@@ -8,5 +8,6 @@ urlpatterns= [
     path('employee/', views.EmployeeView.as_view(), name='employee'),
     path('employee/<int:pk>/', views.EmployeeDetail.as_view(), name='employee'),
     path('social/', views.Socials.as_view(), name='social'),
+     path('societe/', views.SocietyList.as_view(), name='society-list'),
     path('societe/<int:pk>/', views.Society.as_view(), name='societe'),
 ]

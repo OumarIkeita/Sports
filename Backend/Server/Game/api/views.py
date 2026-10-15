@@ -6,7 +6,8 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from rest_framework import status, mixins, generics
-from . import filters
+from django_filters.rest_framework import DjangoFilterBackend
+from .filters import SocialFilter
 # Create your views here.
 #-------------Create a view to handle GET and POST requests for all students
 @api_view(["GET","POST"])
@@ -115,7 +116,8 @@ class EmployeeDetail(APIView):
 class Socials(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
     queryset = Social.objects.all()
     serializer_class = SocialSerializer
-    filterSet_class = filters
+    filter_backends = [DjangoFilterBackend]
+    filterSet_class = SocialFilter
 
     def get(self, request):
         return self.list(request)
@@ -126,7 +128,6 @@ class Socials(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAP
 class Society(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, generics.GenericAPIView):
     queryset = Social.objects.all()
     serializer_class = SocialSerializer
-    filterset_fields = ['soc_name']
 
     def get(self , request, pk):
         return self.retrieve(request, pk)
@@ -135,4 +136,11 @@ class Society(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.Destroy
         return self.update(request, pk)
 
     def delete(self , request, pk):
-        return self.delete(request, pk)
+        return self.destroy(request, pk)
+
+
+class SocietyList(generics.ListAPIView):
+    queryset = Social.objects.all()
+    serializer_class = SocialSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = SocialFilter
